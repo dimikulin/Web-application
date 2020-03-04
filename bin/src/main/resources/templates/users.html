@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml">     
+     <head>
+        <meta charset="utf-8" />         
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>         
+        <title>Krótka Piłka</title> 
+        <style th:include="layout :: podstawy"></style>
+    </head>  
+    <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <body>         
+        <div th:include="layout :: navigationPanel"></div>  
+        <div class="tresc">
+        <h1>Lista użytkowników:</h1>         
+        <div th:if="${#lists.isEmpty(userlist)}">             
+            Brak użytkowników  w bazie danych...         
+        </div>
+        <table th:if="${!#lists.isEmpty(userlist)}">             
+            <thead>                 
+                <tr>                     
+                <th>UserID</th>                     
+                <th>Imie</th>                     
+                <th>Nazwisko</th>                     
+                <th>Login</th>                     
+                <th>Zaszyfrowane hasło</th>
+                <th>Przycisk do usuwania konta</th>  
+                </tr>             
+            </thead>             
+            <tbody>                 
+                <tr th:each="users: ${userlist}">                     
+                    <td th:text="${users.userid}"></td>                     
+                    <td th:text="${users.name}"></td>                     
+                    <td th:text="${users.surname}"></td>                     
+                    <td th:text="${users.login}"></td>                     
+                    <td th:text="${users.password}"></td>       
+                    <td th:if="${users.userid} == ${user.userid}">
+                        <form th:action="@{/delete}" method="POST" th:object="${user}">
+                            <button type="submit">Usuń swoje konto</button>         
+                        </form>     
+                    </td>
+                    <td th:if="${users.userid} != ${user.userid}">
+                        <form th:action="@{/deletethisaccount?id=__${users.userid}__}" method="POST">
+                            <button type="submit">Usuń to konto</button>         
+                        </form>     
+                    </td> 
+                </tr>             
+            </tbody>         
+        </table>
+        </div>
+        <div th:include="layout :: footer"></div>     
+    </body> 
+</html>
