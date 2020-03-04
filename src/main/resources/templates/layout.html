@@ -1,0 +1,282 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleafspring4-4.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"       
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"       
+xmlns:th="http://www.thymeleaf.org">     
+    <head>         
+        <meta charset="utf-8" />         
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>         
+        <title>Krótka Piłka</title>         
+        <style th:fragment='podstawy'> 
+            body {
+                margin: 0;
+                text-align:center;
+                font-family: 'Averia Gruesa Libre', sans-serif;
+                font-size:20px;
+                background-color: #d0b300;
+            }
+            .footer {
+                background-color:#282d37;
+                color: #808080;
+                position: fixed; bottom: 0px; width: 100%;             
+            }
+            .menu {
+               background-color:#282d37;
+               position: fixed; top: 0px; width: 100%;
+            }
+            .buttonmenu
+            {
+                background-color: #808080; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 12px;
+                border-radius: 12px;
+                border: 2px solid #d0b300; /*do obramowania */
+            }
+            .nav{
+                margin:0;
+                padding-bottom: 20px;
+            }
+            .nav > li {
+                display: inline;  
+                color: #808080;
+            }              
+            a { text-decoration: none;
+                color: #808080;
+            }
+           .tresc
+           {
+               padding-top: 150px;
+           }
+           .trescformularza
+           {
+               padding-top: 100px;
+               font-size: 16px;
+           }
+           .center{
+               margin-left:auto; 
+               margin-right:auto;
+           }
+        </style> 
+            <style th:fragment='formularz'>
+               input[type=submit] {
+                font-family: 'Averia Gruesa Libre', sans-serif;
+                background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }     
+            table
+      {
+        border-spacing:15px;
+      }
+      label 
+      {
+        color:#02639a;
+        font-size:16px;
+        width:75px;
+        margin-left:10px; 
+      }
+      fieldset 
+      {
+        border:2px solid #02639a;
+        background-color:#e5f0f7;
+        padding:3px;
+        width:250px;
+        margin:auto;
+      }
+      legend 
+      {
+        color:#02639a;
+        background-color:#d1e8f7;
+        border:5px solid #02639a;
+        padding:3px;
+        font-weight:bold;
+        margin-left:-10px; 
+      }        
+          .button {
+           background-color: #4CAF50; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+         }      
+            </style>
+    </head>
+    <body> 
+        <div th:fragment="logo" >
+            <div class="menu">
+                <a th:href="@{/login}"><img src="https://i.ibb.co/1MVKgsh/logo.png" alt="logo" border="0" height="70" width="210"></a>
+            </div>
+        </div> 
+
+        
+        <div th:fragment="navigationPanel" >
+            <div class="menu">
+            <a th:href="@{/users}"><img src="https://i.ibb.co/1MVKgsh/logo.png" alt="logo" border="0" height="70" width="210"></a>
+            <ul class="nav">
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/profile}" class="buttonmenu">Moje konto</a></li>           
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/users}" class="buttonmenu">Strona główna</a></li>                
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/logout}" class="buttonmenu">Wyloguj się</a></li>             
+            </ul> 
+            </div>
+        </div> 
+ 
+        <div th:fragment="footer">             
+            <footer class="footer">                    
+                <p>&copy; 2019 - Mateusz Mikuła</p>             
+            </footer>         
+        </div>
+        
+        <div th:fragment="logowanie"> 
+            <div class="tresc">        
+                <form th:action="@{/login}" method="POST">                           
+                     <fieldset>
+                            <legend>LOGOWANIE</legend>
+                            <table>
+                              <tr>
+                                <td>
+                                  <label for="login">Login:</label>
+                                </td>
+                                <td>
+                                  <input type="text" name="login" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <label for="haslo">Hasło:</label>
+                                </td>
+                                <td>
+                                  <input type="password" name="passwd" />
+                                </td>
+                              </tr>
+                               <tr>
+                                <td colspan="2">
+                                 <div style="color: green; font-size: 12px" th:text="${createuser}"></div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                 <div style="color: green; font-size: 12px" th:text="${blad}"></div>
+                                </td>
+                              </tr>
+                              <tr>                      
+                                <td colspan="2">
+                                  <input type="submit" value="Zaloguj się" />
+                                </td>
+                              </tr>
+                                <tr>
+                                <td colspan="2">
+                                   <a th:href="@{/register}" class="button">Zarejestruj sie</a>
+                                </td>
+                              </tr>
+                            </table>   
+                        </fieldset>                  
+                </form>        
+            </div>
+        </div>
+        
+        <div th:fragment="rejestracja">
+            <div class="trescformularza">       
+                <form th:action="@{/register}" method="POST" th:object="${user}">                                           
+                      <fieldset>
+                            <legend>Rejestracja</legend>
+                            <table>
+                              <tr>
+                                <td>
+                                  <label for="name">Imię:</label>
+                                </td>
+                                <td>
+                                  <input type="text" th:field="*{name}" />
+                                </td>
+                              </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span style="color: red; font-size: 12px" th:errors="*{name}" class="error"></span>
+                                    </td>
+                                </tr>
+                              <tr>
+                                <td>
+                                  <label for="surname">Nazwisko:</label>
+                                </td>
+                                <td>
+                                  <input type="text" th:field="*{surname}" />
+                                </td>
+                              </tr>
+                                 </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span style="color: red; font-size: 12px" th:errors="*{surname}" class="error"></span>
+                                    </td>
+                                </tr>
+                              <tr>
+                                 <tr>
+                                <td>
+                                    <label for="email">Email:</label>
+                                </td>
+                                <td>
+                                  <input type="text" th:field="*{email}" />
+                                </td>
+                              </tr>
+                                   </tr>
+                                <tr>
+                                    <td colspan="2">
+                                    <div style="color: red; font-size: 12px" th:text="${emailExistMessage}"></div>
+                                        <span style="color: red; font-size: 12px" th:errors="*{email}" class="error"></span>
+                                    </td>
+                                </tr>
+                              <tr>
+                                <tr>
+                                <td>
+                                  <label for="login">Login:</label>
+                                </td>
+                                <td>
+                                  <input type="text" th:field="*{login}" />
+                                </td>
+                              </tr>
+                                   </tr>
+                                <tr>
+                                    <td colspan="2">
+                                    	<div style="color: red; font-size: 12px" th:text="${userExistMessage}"></div>
+                                        <span style="color: red; font-size: 12px" th:errors="*{login}" class="error"></span>
+                                    </td>
+                                </tr>
+                              <tr>
+                                <tr>
+                                <td>
+                                  <label for="password">Hasło:</label>
+                                </td>
+                                <td>
+                                  <input type="password" th:field="*{password}"/>
+                                </td>
+                              </tr>
+                                   </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <span style="color: red; font-size: 12px" th:errors="*{password}" class="error"></span>
+                                    </td>
+                                </tr>
+                              <tr>
+                              <tr>
+                                <td colspan="2">
+                                  <input type="submit" value="Zarejestruj się" />
+                                </td>
+                              </tr>
+                            </table>
+                        </fieldset>
+            </form>
+            </div>
+        </div>
+        
+    </body> 
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml">     
+     <head>
+        <meta charset="utf-8" />         
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>         
+        <title>Krótka Piłka</title> 
+        <style th:include="layout :: podstawy"></style>
+    </head>  
+ <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <body>         
+        <div th:include="layout :: navigationPanel"></div>
+        <div class="tresc">
+        <h1 th:text="'Witaj ' +${user.login}"></h1>
+        <h2>Twoje dane:</h2>
+        <table class="center">                         
+            <tbody>                 
+                <tr>                     
+                    <td>Imię</td>                     
+                    <td th:text="${user.name}"></td>
+                </tr>
+                <tr>                     
+                    <td>Nazwisko</td>                     
+                    <td th:text="${user.surname}"></td>
+                </tr>
+                <tr>                     
+                    <td>Email</td>                     
+                    <td th:text="${user.email}"></td>
+                </tr>
+            </tbody>         
+        </table>   
+        <table class="center">                         
+            <tbody>
+                <tr>
+                     <form th:action="@{/updatename}" method="GET" th:object="${user}">
+                        <td>
+                            Zmień imię:
+                        </td>
+                        <td>
+                            <input type="text" name="name" />
+                        </td>
+                        <td>              
+                            <button type="submit">Potwierdź</button>          
+                        </td>
+                    </form> 
+                </tr>
+                <tr>
+                     <form th:action="@{/updatesurname}" method="GET" th:object="${user}">
+                        <td>
+                            Zmień nazwisko:
+                        </td>
+                        <td>
+                            <input type="text" name="surname" />
+                        </td>
+                        <td>              
+                            <button type="submit">Potwierdź</button>          
+                        </td>
+                    </form> 
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <form th:action="@{/delete}" method="POST" th:object="${user}">
+                            <button type="submit">Usuń swoje konto</button>         
+                        </form> 
+                    </td>
+                </tr>
+            </tbody>         
+        </table>
+        
+        </div>        
+        <div th:include="layout :: footer"></div>     
+    </body> 
+</html>
