@@ -80,7 +80,7 @@
                     
                     <td th:if="${user.userid} == ${posts.userid}">
                         <form th:action="@{/deletethispost?id=__${posts.postid}__}" method="POST">
-                            <button type="submit">Usuń swój post</button>         
+                            <input type="submit" value = "Usuń swój post"/>
                         </form>     
                     </td> 
                     

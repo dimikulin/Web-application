@@ -6,7 +6,11 @@ xmlns:th="http://www.thymeleaf.org">
         <meta charset="utf-8" />         
         <meta name="viewport" content="width=device-width, initial-scale=1"/>         
         <title>Krótka Piłka</title>         
-        <style th:fragment='podstawy'> 
+        <style th:fragment='podstawy'>
+            * {
+                box-sizing: border-box;
+            }
+
             body {
                 margin: 0;
                 text-align:center;
@@ -28,13 +32,13 @@ xmlns:th="http://www.thymeleaf.org">
                 background-color: #808080; /* Green */
                 border: none;
                 color: white;
-                padding: 15px 32px;
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 12px;
                 border-radius: 12px;
                 border: 2px solid #d0b300; /*do obramowania */
+                width: 20%;
+                font-size: 16px;
             }
             .nav{
                 margin:0;
@@ -125,10 +129,10 @@ xmlns:th="http://www.thymeleaf.org">
             <div class="menu">
             <a th:href="@{/users}"><img src="https://i.ibb.co/1MVKgsh/logo.png" alt="logo" border="0" height="70" width="210"></a>
             <ul class="nav">
-                <li sec:authorize="isAuthenticated()"> <a th:href="@{/profile}" class="buttonmenu">Moje konto</a></li>           
-                <li sec:authorize="isAuthenticated()"> <a th:href="@{/users}" class="buttonmenu">Strona główna</a></li>                
-                <li sec:authorize="isAuthenticated()"> <a th:href="@{/logout}" class="buttonmenu">Wyloguj się</a></li>             
-            </ul> 
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/profile}" class="buttonmenu">Moje konto</a></li>
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/users}" class="buttonmenu">Strona główna</a></li>
+                <li sec:authorize="isAuthenticated()"> <a th:href="@{/logout}" class="buttonmenu">Wyloguj się</a></li>
+            </ul>
             </div>
         </div> 
  

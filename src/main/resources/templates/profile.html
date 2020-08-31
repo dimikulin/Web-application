@@ -5,6 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>         
         <title>Krótka Piłka</title> 
         <style th:include="layout :: podstawy"></style>
+         <style>
+             input[type=submit] {
+                 font-family: 'Averia Gruesa Libre', sans-serif;
+                 background-color: #4CAF50; /* Green */
+                 border: none;
+                 color: white;
+                 padding: 15px 32px;
+                 text-align: center;
+                 text-decoration: none;
+                 display: inline-block;
+                 font-size: 16px;
+             }
+         </style>
     </head>  
  <link href='http://fonts.googleapis.com/css?family=Averia+Gruesa+Libre&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <body>         
@@ -39,9 +52,9 @@
                             <input type="text" name="name" />
                         </td>
                         <td>              
-                            <button type="submit">Potwierdź</button>          
+                            <input type="submit" value = "Potwierdź"/>
                         </td>
-                    </form> 
+                    </form>
                 </tr>
                 <tr>
                      <form th:action="@{/updatesurname}" method="GET" th:object="${user}">
@@ -51,15 +64,15 @@
                         <td>
                             <input type="text" name="surname" />
                         </td>
-                        <td>              
-                            <button type="submit">Potwierdź</button>          
+                        <td>
+                            <input type="submit" value = "Potwierdź"/>
                         </td>
                     </form> 
                 </tr>
                 <tr>
                     <td colspan="3">
                         <form th:action="@{/delete}" method="POST" th:object="${user}">
-                            <button type="submit">Usuń swoje konto</button>         
+                            <input type="submit" value = "Usuń swoje konto"/>
                         </form> 
                     </td>
                 </tr>
