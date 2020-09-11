@@ -13,10 +13,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity; 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter; 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; 
-import org.springframework.security.crypto.password.PasswordEncoder; 
- 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Configuration 
-public class Security extends WebSecurityConfigurerAdapter { 
+public class Security extends WebSecurityConfigurerAdapter {
  
     @Autowired     
     private UserAuthenticationDetails userAuthenticationDetails; 
@@ -38,7 +38,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         authenticationProvider.setUserDetailsService(userAuthenticationDetails);         
         authenticationProvider.setPasswordEncoder(passwordEncoder());         
         return authenticationProvider;     
-    } 
+    }
  
     @Override     
     protected void configure(HttpSecurity http) throws Exception {         
