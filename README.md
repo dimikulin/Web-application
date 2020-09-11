@@ -19,14 +19,14 @@ Project is created with:
 * Hibernate,
 * Thymeleaf.
 
-Login Page:
+### Login Page:
 ![image](https://user-images.githubusercontent.com/45290627/92919447-ce999280-f430-11ea-9018-d272ffd080b5.png)
 
-Registration form (fields are validated):
+### Registration form (fields are validated):
 ![image](https://user-images.githubusercontent.com/45290627/92919429-c4779400-f430-11ea-97ca-fe1b19134896.png)
 
-Account details:
+### Account details:
 ![image](https://user-images.githubusercontent.com/45290627/92919496-e4a75300-f430-11ea-99a3-193ca4a5fb34.png)
 
-Home page (posts):
+### Home page (posts):
 ![image](https://user-images.githubusercontent.com/45290627/92919520-f0931500-f430-11ea-81b2-bc84a07df642.png)
